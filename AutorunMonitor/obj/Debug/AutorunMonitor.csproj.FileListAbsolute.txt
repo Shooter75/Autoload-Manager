@@ -1,0 +1,15 @@
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\bin\Debug\AutorunMonitor.exe
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\bin\Debug\AutorunMonitor.pdb
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\bin\Debug\FirstFloor.ModernUI.dll
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\bin\Debug\FirstFloor.ModernUI.xml
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\AutorunMonitor.csprojResolveAssemblyReference.cache
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\MainWindow.baml
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\Pages\Home.baml
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\App.baml
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\MainWindow.g.cs
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\Pages\Home.g.cs
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\App.g.cs
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\AutorunMonitor_MarkupCompile.cache
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\AutorunMonitor.g.resources
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\AutorunMonitor.exe
+c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\AutorunMonitor.pdb
