@@ -13,3 +13,4 @@ c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMo
 c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\AutorunMonitor.g.resources
 c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\AutorunMonitor.exe
 c:\users\yaroslav\documents\visual studio 2013\Projects\AutorunMonitor\AutorunMonitor\obj\Debug\AutorunMonitor.pdb
+C:\Users\Yaroslav\Documents\Visual Studio 2013\Projects\AutorunMonitor\AutorunMonitor\bin\Debug\AutorunMonitor.exe.config

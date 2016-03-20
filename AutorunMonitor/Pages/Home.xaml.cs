@@ -14,11 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Input;
-
+using System.Configuration;
 using System.IO;
 using System.Threading;
 using System.Timers;
+using System.Xml.Serialization;
 
 namespace AutorunMonitor.Pages
 {
@@ -27,8 +27,8 @@ namespace AutorunMonitor.Pages
     /// </summary>
     public partial class Home : UserControl
     {
-        public List<RegisterModel>   RegisterList = null;
-        public RegistryKey           RegisterKey  = null;
+        public List<RegisterModel>  RegisterList = null;
+        public RegistryKey          RegisterKey = null;
 
         public Home()
         {
@@ -36,7 +36,9 @@ namespace AutorunMonitor.Pages
             this.RegisterList = new List<RegisterModel>();
 
             this.GenerateNewRows();
+
         }
+
 
         #region Function
 
@@ -51,7 +53,9 @@ namespace AutorunMonitor.Pages
 
         private void GenerateRegistryKey()
         {
-            this.RegisterKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", RegistryKeyPermissionCheck.ReadWriteSubTree, System.Security.AccessControl.RegistryRights.FullControl);
+            String Path = ConfigurationManager.AppSettings.Get("RegisterSection");
+
+            this.RegisterKey = Registry.CurrentUser.OpenSubKey(Path, RegistryKeyPermissionCheck.ReadWriteSubTree, System.Security.AccessControl.RegistryRights.FullControl);
         }
 
 
@@ -95,7 +99,7 @@ namespace AutorunMonitor.Pages
 
 
 
-        private bool RemoveRegisterField() 
+        private bool RemoveRegisterField()
         {
             RegisterModel currentRegister = GetSelectedRow();
 
@@ -114,7 +118,8 @@ namespace AutorunMonitor.Pages
 
 
 
-        private bool AddRegisterField() {
+        private bool AddRegisterField()
+        {
 
             OpenFileDialog ofd = new OpenFileDialog();
 
@@ -124,7 +129,7 @@ namespace AutorunMonitor.Pages
                 this.RegisterKey.SetValue("AUTOLOAD_" + ofd.SafeFileName, '"' + ofd.FileName + '"');
 
                 MessageBox.Show("Success!");
-                
+
                 return true;
             }
             else
@@ -135,36 +140,70 @@ namespace AutorunMonitor.Pages
 
         }
 
+
+
+        private void WriteCurrentAutorun()
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(RegisterModel));
+
+            int i = 0;
+
+            foreach (RegisterModel item in this.RegisterList)
+            {
+                TextWriter tw = new StreamWriter(@"C:\Users\Yaroslav\Documents\Visual Studio 2013\Projects\AutorunMonitor\Store\store" + i + ".xml");
+
+                xs.Serialize(tw, item);
+
+                tw.WriteLine('\0');
+                tw.Close();
+
+                ++i;
+            }
+
+        }
+
+
+
+        private void CompareAutorun()
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(RegisterModel));
+
+            try
+            {
+                for (int i = 0; i < this.RegisterList.Count; i++)
+                {
+                    TextReader sr = new StreamReader(String.Format(@"C:\Users\Yaroslav\Documents\Visual Studio 2013\Projects\AutorunMonitor\Store\store{0}.xml", i));
+
+                    RegisterModel LastItemAutorun = (RegisterModel)xs.Deserialize(sr);
+
+                    sr.Close();
+
+                    if (this.RegisterList[i].Equals(LastItemAutorun))
+                    {
+                        Console.WriteLine("Object # " + i + " equal!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Object # " + i + " not equal!");
+                        throw new InvalidProgramException();
+                    }
+
+                }
+
+                MessageBox.Show("Autorun Equel!");
+
+            }
+            catch
+            {
+                MessageBox.Show("Autorun defferent!");
+            }
+
+        }
+
         #endregion
 
 
         #region Event
-
-        private void Refresh_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.GenerateNewRows();
-        }
-
-
-
-        private void Remove_B_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                if (this.RemoveRegisterField())
-                {
-                    //Refresh data
-                    this.GenerateNewRows();
-                }                
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
 
         private void Add_B_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -183,6 +222,47 @@ namespace AutorunMonitor.Pages
             }
 
         }
+
+
+
+        private void Remove_B_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (this.RemoveRegisterField())
+                {
+                    //Refresh data
+                    this.GenerateNewRows();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+        private void Refresh_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.GenerateNewRows();
+        }
+
+
+
+        private void Save_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            WriteCurrentAutorun();
+        }
+
+
+
+        private void Compare_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.CompareAutorun();
+        }
+
 
 
 
@@ -222,12 +302,11 @@ namespace AutorunMonitor.Pages
                         MessageBox.Show(ex.Message);
                     }
                     break;
-
             }
+
         }
 
         #endregion
-
 
     }
 }

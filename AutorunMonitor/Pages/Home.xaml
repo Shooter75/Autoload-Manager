@@ -7,14 +7,17 @@
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer Width="Auto" >
             <StackPanel Width="Auto" >
-                <DataGrid Width="Auto" x:Name="RegisterField_DG" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" EnableRowVirtualization="True" Height="Auto" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" KeyDown="RegisterField_DG_KeyDown">
+                <DataGrid Width="Auto" x:Name="RegisterField_DG" AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" Height="Auto" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" KeyDown="RegisterField_DG_KeyDown">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <Label Name="Remove_B" Content="Remove" MouseDown="Remove_B_MouseDown" />
-                            <Label Name="Add_B" Content="Add" MouseDown="Add_B_MouseDown" />
-                            <Label Name="Refresh" Content="Refresh" MouseDown="Refresh_MouseDown" />
+                            <Label Name="Remove_B"  Content="Remove"  MouseDown="Remove_B_MouseDown" />
+                            <Label Name="Add_B"     Content="Add"     MouseDown="Add_B_MouseDown" />
+                            <Label Name="Refresh"   Content="Refresh" MouseDown="Refresh_MouseDown" />
+                            <Label Name="Save"      Content="Save"    MouseDown="Save_MouseDown" />
+                            <Label Name="Compare"   Content="Compare" MouseDown="Compare_MouseDown" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
+                    
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="Key"   Binding="{Binding Key}"   Header="Key"   Width="Auto"/>
                         <DataGridTextColumn x:Name="Value" Binding="{Binding Value}" Header="Value" Width="Auto"/>
